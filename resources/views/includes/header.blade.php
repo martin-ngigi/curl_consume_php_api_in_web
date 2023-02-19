@@ -17,7 +17,7 @@
                    </ul>
                 </li>
                 <li class="nav-item">
-                   <a class="nav-link"  href="">Add User</a>
+                   <a class="nav-link"  href="{{url('add_user')}}">Add User</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">Update User</a>

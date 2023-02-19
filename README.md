@@ -1,6 +1,7 @@
 # Curl Consume Php PPI in web
 ## Dummy API servers:
-- [Dummy Json](https://dummyjson.com/users)
+- [Dummy json] (https://dummyjson.com/)
+- [Dummy Json users](https://dummyjson.com/users)
 - [Rest api example](https://dummy.restapiexample.com/api/v1/employees)
 
 

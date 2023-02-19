@@ -6,13 +6,38 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public $url = "https://dummyjson.com/users";
+
     //
     public function indexMethod(){
 
         //$url = "https://dummy.restapiexample.com/api/v1/employees";
-        $url = "https://dummyjson.com/users";
-        $user_data = $this->callAPI("GET", $url, false);
+        $user_data = $this->callAPI("GET", $this->url, false);
         return view('index' , compact('user_data') );
+
+    }
+
+    public function addUserPageMethod(){
+        return view('add_user');
+    }
+
+    public function user_add_method(Request $request){
+        $url_2 = $this->url."/add";
+        //get data array from add_user.blade.php
+        $data_array = array (
+            "firstName" => $request->first_name,
+            "lastName" => $request->last_name,
+            "age"=>$request->age
+        );
+
+        //callAPI method
+        $make_call = $this -> callAPI("POST", $url_2, json_encode($data_array));
+
+        //var_dump($make_call);
+
+        //return a redirection to the original page with a success message
+        return redirect()->back()->with('message', "User ".$request['first_name'] ." was added successfully");
+
 
     }
 
@@ -29,6 +54,12 @@ class UserController extends Controller
                 // This option will return data as a string instead of direct output
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
+                break;
+            case "POST":
+                curl_setopt($curl, CURLOPT_POST, true); //true is same as 1
+                if($data){
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                }
                 break;
 
         }

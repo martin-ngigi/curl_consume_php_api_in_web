@@ -21,5 +21,22 @@ use Illuminate\Support\Facades\Route;
 /**
  * '/' is the URL
  * 'indexMethod' is the method defined in the UserController
+ * eg. http://127.0.0.1:8000/
  */
 Route::get('/', [UserController::class, 'indexMethod']);
+
+
+/**
+ * '/add_user' is the URL
+ * 'addUserMethod' is the method defined in the UserController returning the page
+ * eg. http://127.0.0.1:8000/add_user
+ */
+Route::get('/add_user', [UserController::class, 'addUserPageMethod']);
+
+//user_add
+/**
+ * '/user_add' is the URL
+ * 'user_add' is the method defined in the UserController for adding a user
+ * eg. http://127.0.0.1:8000/add_user1
+ */
+Route::post('/add_user_data', [UserController::class, 'user_add_method']);
