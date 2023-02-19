@@ -33,10 +33,35 @@ Route::get('/', [UserController::class, 'indexMethod']);
  */
 Route::get('/add_user', [UserController::class, 'addUserPageMethod']);
 
-//user_add
+//add_user_data
 /**
- * '/user_add' is the URL
- * 'user_add' is the method defined in the UserController for adding a user
- * eg. http://127.0.0.1:8000/add_user1
+ * '/add_user_data' is the URL
+ * 'add_user_data' is the method defined in the UserController for adding a user
+ * eg. http://127.0.0.1:8000/add_user_data
  */
 Route::post('/add_user_data', [UserController::class, 'user_add_method']);
+
+//update_user
+/**
+ * '/update_user' is the URL
+ * 'update_user' is the method defined in the UserController for adding a user
+ * eg. http://127.0.0.1:8000/update_user
+ */
+Route::get('/update_user', [UserController::class, 'updateUserPageMethod']);
+
+//search_user_update_data
+/**
+ * '/search_user_update_data' is the URL
+ * 'search_user_update_data' is the method defined in the UserController for adding a user
+ * eg. http://127.0.0.1:8000/search_user_update_data
+ */
+Route::post('/search_user_update_data', [UserController::class, 'searchUserUpdateDataMethod']);
+
+//update_user_to_api
+/**
+ * '/update_user_to_api' is the URL
+ * 'update_user_to_api' is the method defined in the UserController for adding a user
+ * eg. http://127.0.0.1:8000/update_user_to_api/1
+ */
+Route::post('/update_user_to_api/{id}', [UserController::class, 'updateUserToAPIMethod']);
+

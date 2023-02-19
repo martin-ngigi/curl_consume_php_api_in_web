@@ -41,6 +41,39 @@ class UserController extends Controller
 
     }
 
+    public function updateUserPageMethod(){
+        $user_data = $this->callAPI("GET", $this->url, false);
+        $user_data = $user_data->users[0]; //load the first user from the api so as to prevent errors
+
+        return view('update_user' , compact('user_data') ); //update_user.blade.php
+    }
+
+    public function searchUserUpdateDataMethod(Request $request){
+        $id = $request->search_field;
+        $url_2 = $this->url."/".$id; //eg https://dummyjson.com/users/1
+        $user_data = $this->callAPI("GET", $url_2, false);
+        //var_dump($user_data);
+        return view('update_user', compact('user_data') );
+
+    }
+
+    public function updateUserToAPIMethod(Request $request, $id){
+        $url_2 = $this->url."/".$id; //eg https://dummyjson.com/users/1
+        //get data array from add_user.blade.php
+        $data_array = array (
+            "firstName" => $request->first_name,
+            "lastName" => $request->last_name,
+            "age"=>$request->age
+        );
+
+        $user_data = $this->callAPI("PUT", $url_2, json_encode($data_array));
+
+        //var_dump($user_data);
+        return redirect('update_user')->with('message', "User ".$request['first_name'] ." was added successfully");
+        //return redirect()->back()->with('message', "User ".$request['first_name'] ." was added successfully");
+        //return view('update_user', compact('user_data'));
+    }
+
 
     public function callAPI($method, $url, $data){
         //init curl
@@ -58,6 +91,12 @@ class UserController extends Controller
             case "POST":
                 curl_setopt($curl, CURLOPT_POST, true); //true is same as 1
                 if($data){
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                }
+                break;
+            case "PUT":
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+                if ($data){
                     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
                 }
                 break;
